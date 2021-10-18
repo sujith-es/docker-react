@@ -1,0 +1,25 @@
+# A buildspec.yml file informs AWS CodeBuild of all the actions that should be
+# taken during a build execution for our application. We are able to divide the
+# build execution in separate pre-defined phases for logical organization, and
+# list the commands that will be executed on the provisioned build server
+# performing a build execution job.
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo start pre_build ...
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t sujithes/docker-react -f Dockerfile.dev .
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - docker run sujithes/docker-react yarn test -- --coverage
+      - echo test test completed successfully..
+artifacts:
+  # Indicate that the created imagedefinitions.json file created on the previous
+  # line is to be referenceable as an artifact of the build execution job.
+  files: imagedefinitions.json
