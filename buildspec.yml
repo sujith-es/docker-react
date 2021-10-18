@@ -1,18 +1,20 @@
 version: 0.2
 
 phases:
-  pre_build:
+  install:
     commands:
-      - echo start pre_build ...
-  build:
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+  pre_build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t sujithes/docker-react:latest .
+  build:
+    commands:
+      - docker run sujithes/docker-react
   post_build:
     commands:
-      - echo Build started on `date`
-      - docker run sujithes/docker-react
       - echo build completed on `date`
 artifacts:
   # Indicate that the created imagedefinitions.json file created on the previous
