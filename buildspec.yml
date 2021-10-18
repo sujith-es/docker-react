@@ -8,11 +8,11 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t sujithes/docker-react -f Dockerfile.dev .
+      - docker build -t sujithes/docker-react .
   post_build:
     commands:
       - echo Build started on `date`
-      - docker run sujithes/docker-react yarn test -- --coverage
+      - docker run sujithes/docker-react
       - echo build completed on `date`
 artifacts:
   # Indicate that the created imagedefinitions.json file created on the previous
