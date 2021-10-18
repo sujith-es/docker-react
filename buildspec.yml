@@ -8,7 +8,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t /sujithes/docker-react:latest .
+      - docker build -t sujithes/docker-react:latest .
   post_build:
     commands:
       - echo Build started on `date`
