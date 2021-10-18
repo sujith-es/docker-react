@@ -14,7 +14,7 @@ phases:
       - echo Build started on `date`
       - docker run sujithes/docker-react yarn test -- --coverage
       - echo test test completed successfully..
-       - echo Build completed on `date`
+        - echo build completed on `date`
 artifacts:
   # Indicate that the created imagedefinitions.json file created on the previous
   # line is to be referenceable as an artifact of the build execution job.
